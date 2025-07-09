@@ -384,13 +384,14 @@ poc_menu() {
                     echo -e "\n\e[1;36m--- Simulating Web Defacement --- \e[0m"
                                     
                     cd usecase/webdeface
-                    sudo sed -i -e "s/(your_vm_ip)/$IP_ADDRESS/g" ./server.js
+                    IP=$(curl -s ip.me -4 || hostname -I | awk '{print $1}')
+                    sudo sed -i -e "s/(your_vm_ip)/$IP/g" ./server.js
                     
                     echo -e "\e[1;34m[INFO] Starting a temporary web server...\e[0m"
                     nohup node server.js > server.log 2>&1 &
                     WEBSERVER_PID=$! # Save the Process ID
 
-                    echo -e "\n\e[1;33mAction Required: Before we simulate the defacement, please visit your website at:\e[0m http://$IP_ADDRESS:3000"
+                    echo -e "\n\e[1;33mAction Required: Before we simulate the defacement, please visit your website at:\e[0m http://$IP:3000"
                     read -p "Ready to perform the web defacement? (y/n) " -r
                     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
                         echo "Operation cancelled. Shutting down web server."
