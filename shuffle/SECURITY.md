@@ -17,3 +17,6 @@ Security.txt: https://shuffler.io/.well-known/security.txt
 
 When a >medium severity vulnerability is discovered, expect it to be fixed ASAP - please nag us until it is otherwise. Security is a top priority, and we expect and hope you hold us accountable.
 In the case it makes sense, we'll further create a security advisory, and publish a new CVE for your new glorious finding.
+
+
+Shuffle

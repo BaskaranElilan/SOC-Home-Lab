@@ -11,7 +11,7 @@ print_banner() {
     echo " |_____/ \____/ \_____| |______\__,_|_.__/  "
     echo "                                            "
     echo "                     SOC Home Lab"
-    echo "                 Build Your Fortress."
+    echo "                    Baskaran Elilan"
     echo -e "\e[0m"
 }
 
