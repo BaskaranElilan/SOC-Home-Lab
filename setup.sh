@@ -3,14 +3,15 @@
 # Banner
 print_banner() {
     echo -e "\n\e[1;38;2;255;69;0m"
-    echo "|.___---___.||     ___________        ________                       .___   "
-    echo "|     |     ||     \__    ___/       /  _____/ __ _______ _______  __| _/   "
-    echo "|     |     ||       |    |  ______ /   \  ___|  |  \__  \\\\_  __ \\/ __ | "
-    echo "|-----o-----||       |    | /_____/ \    \_\  \  |  // __ \|  | \\/ /_/ |   "
-    echo ":     |     ::       |____|          \______  /____/(____  /__|  \____ |    "
-    echo " \    |    //                               \/           \/           \/    "
-    echo "  '.__|__.'          Start Your Defence."
-    echo "                        Build Your Fortress."
+    echo "   _____  ____   _____   _           _      "
+    echo "  / ____|/ __ \ / ____| | |         | |     "
+    echo " | (___ | |  | | |      | |     __ _| |__   "
+    echo "  \___ \| |  | | |      | |    / _\` | '_ \  "
+    echo "  ____) | |__| | |____  | |___| (_| | |_) | "
+    echo " |_____/ \____/ \_____| |______\__,_|_.__/  "
+    echo "                                            "
+    echo "                     SOC Home Lab"
+    echo "                 Build Your Fortress."
     echo -e "\e[0m"
 }
 
@@ -43,7 +44,7 @@ update_install_pre() {
 # Function for Install all module: Wazuh, IRIS, Shuffle, MISP
 install_module() {
     echo
-    echo -e "\e[1;32m -- Step 2: Install T-Guard SOC Package -- \e[0m"
+    echo -e "\e[1;32m -- Step 2: Install SOC Home Lab Package -- \e[0m"
     echo
 
     # --- Initial Network Configuration ---
@@ -111,19 +112,6 @@ install_module() {
     wazuh_version=$(sudo docker images --format '{{.Repository}}:{{.Tag}}' | grep '^wazuh/wazuh-dashboard:' | head -n 1 | cut -d':' -f2)
     
     if [ -z "$wazuh_version" ]; then
-        echo -e "\e[1;31m[ERROR] Could not determine Wazuh version from Docker images.\e[0m"
-        exit 1
-    fi
-
-    wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_${wazuh_version}-1_amd64.deb -O wazuh-agent.deb
-    
-    # Install using the pre-configured IP and agent name
-    sudo WAZUH_MANAGER="$IP_ADDRESS" WAZUH_AGENT_NAME="001-tguard-agent" dpkg -i ./wazuh-agent.deb
-    sudo systemctl daemon-reload
-    sudo systemctl enable wazuh-agent
-    sudo systemctl start wazuh-agent
-    echo -e "\e[1;32mWazuh Agent deployed successfully.\e[0m"
-    cd ..
     
     # --- 2. Installing Shuffle (SOAR) ---
     echo -e "\n\e[1;36m--> Installing Shuffle...\e[0m"
@@ -208,7 +196,7 @@ install_module() {
     cd ..
 
     echo
-    echo -e "\e[1;32m Step 2 Completed: All T-Guard SOC packages have been deployed. \e[0m"
+    echo -e "\e[1;32m Step 2 Completed: All SOC Home Lab packages have been deployed. \e[0m"
     
     # Wait the initialization
     echo -e "\e[1;34m[INFO] Waiting for 60 seconds for all services to initialize properly...\e[0m"
@@ -230,7 +218,7 @@ install_module() {
     # --- Display Final Access Details in a Formatted Box ---
     printf "\n"
     printf "${GREEN}+----------------------------------------------------------------------+\n"
-    printf "|${WHITE}      T-Guard SOC Package - Dashboard Access Default Credentials      ${GREEN}|\n"
+    printf "|${WHITE}      SOC Home Lab Package - Dashboard Access Default Credentials     ${GREEN}|\n"
     printf "+----------------------------------------------------------------------+\n"
     
     # Wazuh Details
@@ -278,7 +266,7 @@ integrate_module() {
     cd wazuh && sudo docker compose restart && cd ..
     echo -e "\e[1;32m IRIS-Wazuh integration complete.\e[0m"
     echo
-
+    
     # --- 2. MISP <-> Wazuh Integration ---
     echo -e "\n\e[1;36m--- Configuring MISP <-> Wazuh --- \e[0m"
     sudo cp wazuh/custom-integrations/custom-misp.py /var/lib/docker/volumes/wazuh_wazuh_integrations/_data/custom-misp.py
@@ -443,7 +431,7 @@ while true; do
     # Force the menu into a single column
     COLUMNS=1 
 
-    select opt in "Step 1: Update and Install Prerequisites" "Step 2: Install T-Guard SOC Package" "Step 3: Integrate T-Guard SOC Package" "Step 4: Run Proof of Concept (PoC)" "Exit"; do
+    select opt in "Step 1: Update and Install Prerequisites" "Step 2: Install SOC Home Lab Package" "Step 3: Integrate SOC Home Lab Package" "Step 4: Run Proof of Concept (PoC)" "Exit"; do
         case $REPLY in
             1) update_install_pre ; break ;;
             2) install_module ; break ;;
