@@ -2,17 +2,18 @@
 
 # Banner
 print_banner() {
-    echo -e "\n\e[1;38;2;255;69;0m"
-    echo "|.___---___.||     ___________        ________                       .___   "
-    echo "|     |     ||     \__    ___/       /  _____/ __ _______ _______  __| _/   "
-    echo "|     |     ||       |    |  ______ /   \  ___|  |  \__  \\\\_  __ \\/ __ | "
-    echo "|-----o-----||       |    | /_____/ \    \_\  \  |  // __ \|  | \\/ /_/ |   "
-    echo ":     |     ::       |____|          \______  /____/(____  /__|  \____ |    "
-    echo " \    |    //                               \/           \/           \/    "
-    echo "  '.__|__.'          Start Your Defence."
-    echo "                        Build Your Fortress."
+    echo -e "\n\e[1;38;2;255;69;0m"  
+    echo "     _____  ____   _____   _    _                        _       _    " 
+    echo "    / ____|/ __ \ / ____| | |  | |                      | |     | |   " 
+    echo "    | (___| |  | | |      | |__| | ___  _ __ ___   ___  | | __ _| |__  "
+    echo "    \___ \| |  | | |      |  __  |/ _ \| '_ ` _ \ / _ \ | |/ _` | '_ \ "
+    echo "     ____)| |__| | |____  | |  | | (_) | | | | | |  __/ | | (_| | |_) |"
+    echo "    |_____/\____/ \_____| |_|  |_|\___/|_| |_| |_|\___| |_|\__,_|_.__/ "
+    echo "                                                                       "
+    echo "                  Baskaran Elilan - Project                            "     
+    echo " Design and implement a comprehensive home lab for threat intelligence "                                                                
     echo -e "\e[0m"
-}
+}                                                                 
 
 # Function for Update System and Install Prerequisites
 update_install_pre() {
