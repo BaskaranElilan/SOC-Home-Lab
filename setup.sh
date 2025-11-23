@@ -43,7 +43,7 @@ update_install_pre() {
 # Function for Install all module: Wazuh, IRIS, Shuffle, MISP
 install_module() {
     echo
-    echo -e "\e[1;32m -- Step 2: Install T-Guard SOC Package -- \e[0m"
+    echo -e "\e[1;32m -- Step 2: Install Home Lab SOC Package -- \e[0m"
     echo
 
     # --- Initial Network Configuration ---
@@ -118,7 +118,7 @@ install_module() {
     wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_${wazuh_version}-1_amd64.deb -O wazuh-agent.deb
     
     # Install using the pre-configured IP and agent name
-    sudo WAZUH_MANAGER="$IP_ADDRESS" WAZUH_AGENT_NAME="001-tguard-agent" dpkg -i ./wazuh-agent.deb
+    sudo WAZUH_MANAGER="$IP_ADDRESS" WAZUH_AGENT_NAME="001-homelab-agent" dpkg -i ./wazuh-agent.deb
     sudo systemctl daemon-reload
     sudo systemctl enable wazuh-agent
     sudo systemctl start wazuh-agent
@@ -208,7 +208,7 @@ install_module() {
     cd ..
 
     echo
-    echo -e "\e[1;32m Step 2 Completed: All T-Guard SOC packages have been deployed. \e[0m"
+    echo -e "\e[1;32m Step 2 Completed: All Home Lab SOC packages have been deployed. \e[0m"
     
     # Wait the initialization
     echo -e "\e[1;34m[INFO] Waiting for 60 seconds for all services to initialize properly...\e[0m"
@@ -230,7 +230,7 @@ install_module() {
     # --- Display Final Access Details in a Formatted Box ---
     printf "\n"
     printf "${GREEN}+----------------------------------------------------------------------+\n"
-    printf "|${WHITE}      T-Guard SOC Package - Dashboard Access Default Credentials      ${GREEN}|\n"
+    printf "|${WHITE}      Home Lab SOC Package - Dashboard Access Default Credentials      ${GREEN}|\n"
     printf "+----------------------------------------------------------------------+\n"
     
     # Wazuh Details
@@ -443,7 +443,7 @@ while true; do
     # Force the menu into a single column
     COLUMNS=1 
 
-    select opt in "Step 1: Update and Install Prerequisites" "Step 2: Install T-Guard SOC Package" "Step 3: Integrate T-Guard SOC Package" "Step 4: Run Proof of Concept (PoC)" "Exit"; do
+    select opt in "Step 1: Update and Install Prerequisites" "Step 2: Install Home Lab SOC Package" "Step 3: Integrate Home Lab SOC Package" "Step 4: Run Proof of Concept (PoC)" "Exit"; do
         case $REPLY in
             1) update_install_pre ; break ;;
             2) install_module ; break ;;
